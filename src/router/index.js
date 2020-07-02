@@ -1,27 +1,88 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
+import Store from '../store'
+const Home = () => import('../views/Home.vue')
+const Answer = () => import('../views/Answer.vue')
+const Question = () => import('../views/Question.vue')
+const Login = () => import('../views/Login.vue')
+const News = () => import('../views/content/News.vue')
+const Focus = () => import('../views/content/Focus.vue')
+const Posting = () => import('../views/user/Posting.vue')
+const Usercenter = () => import('../views/user/Usercenter.vue')
+const Newsdetails = () => import('../views/content/Newsdetails.vue')
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+const router = new Router({
+  mode: 'history',
+  routes: [
+    {
+      path:'',
+      redirect:'/login'
+    },
+    {
+      path:'/home',
+      component:Home,
+      children:[
+        {
+          path:'',
+          redirect:'news'
+        },
+        {
+          path:'news',
+          component:News
+        },
+        {
+          path:'focus',
+          component:Focus
+        }
+      ]
+    },
+    {
+      path:'/answer',
+      component:Answer
+    },
+    {
+      path:'/question',
+      component:Question
+    },
+    {
+      path:'/login',
+      component:Login
+    },
+    {
+      path:'/posting',
+      component:Posting
+    },
+    {
+      path:'/newsdetails',
+      name:'newsdetails',
+      component:Newsdetails
+    },
+    {
+      path:'/usercenter',
+      component:Usercenter
+    }
+  
+  ]
 
-const router = new VueRouter({
-  routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') {
+    console.log('login_page')
+      next();
+    } else {
+     let token = Store.state.token
+      // console.log("213:",token)
+    if (token === 'null' || token === '') {
+       next('/login');
+    } else {
+       next();
+    }
+    }
+  });
+
+ 
+
+  export default router;

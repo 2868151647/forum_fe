@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-        
+   
+    <router-view></router-view>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-}
+// import Navitem from 'components/nav/nav.vue'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+export default {
+  name:'App',
+  components:{
+  
+  },
+  
 }
+</script>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+<style> 
+/* @import './assets/css/base.css'; */  
+body{
+  margin: 0;
+  padding: 0;
+  background-color: rgb(236, 236, 236);
 }
 </style>

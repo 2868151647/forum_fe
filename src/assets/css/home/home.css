@@ -1,0 +1,28 @@
+body{
+  background-color: #ececec;
+}
+.frame{
+  margin-left: 11%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.main_left{
+  width: 70%;
+  height: 900px;
+  background-color: rgb(255, 255, 255);
+  margin-top: 15px;
+}
+
+
+/* 右边导向栏 */
+.main_right{
+  width: 29%;
+  height: 900px;
+  background-color: rgb(236, 236, 236);
+  margin-top: 15px;
+}
+
+
